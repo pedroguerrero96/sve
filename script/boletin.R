@@ -1,11 +1,11 @@
 ####  SEGUMIENTO DE CASOS DE NEUMONIA E INFECCION RESPIRATORIA AGUDA 
-####  Fuente: Bolet韓 Epidemiol骻ico del Sistema Nacional de Vigilancia Epidemiol骻ica
+####  Fuente: Bolet铆n Epidemiol贸gico del Sistema Nacional de Vigilancia Epidemiol贸gica
 ####  Pedro Guerrero (@mellamopeter)
 ####  Escrito intencionalmente sin acentos
 
   options(scipen = 999)
 #### DEFINE EL DIRECTORIO DE TRABAJO AQUI ####
-  setwd("D:/OneDrive - Centro de Investigacion y Docencia Economicas CIDE/Documentos/COVID")
+  setwd("")
 
 #### INSTALACION Y CARGA DE PAQUETES ####
   install.packages(c("tidyverse", "readxl", "forecast"))
@@ -13,7 +13,7 @@
   library(readxl)
   library(forecast)
 
-#### CARGA DE LA BASE DE NEUMON虯 ####
+#### CARGA DE LA BASE DE NEUMON脥A ####
   neumonia <- read_excel(path = "boletin.xlsx", sheet = "neumonia")
 
 #### CONVERTIMOS LA BASE A UNA SERIE ####
@@ -21,15 +21,15 @@
   neumonia <- ts(neumonia$casos, start = 2015, frequency = 52)
 
 #### GRAFICAS ####
-  ##Serie de tiempo (solo tiene hasta la semana 11 de cada a駉)
+  ##Serie de tiempo (solo tiene hasta la semana 11 de cada a帽o)
   ts.plot(neumonia)
   
   ##Grafica estacional por semana
   ggseasonplot(neumonia) + ylab("Casos reportados por semana") + 
-    labs(title = "Nuevos casos de neumon韆 reportados", 
-         subtitle = "Bolet韓 Epidemiol骻ico del Sistema Nacional de Vigilancia Epidemiol骻ica",
-         caption = "Elaboraci髇 propia con datos de la Secretar韆 de Salud | @mellamopeter") +
-    xlab("Semana epidemiol骻ica") +theme(legend.title=element_blank())
+    labs(title = "Nuevos casos de neumon铆a reportados", 
+         subtitle = "Bolet铆n Epidemiol贸gico del Sistema Nacional de Vigilancia Epidemiol贸gica",
+         caption = "Elaboraci贸n propia con datos de la Secretar铆a de Salud | @mellamopeter") +
+    xlab("Semana epidemiol贸gica") +theme(legend.title=element_blank())
 
   
 #### CARGA DE LA BASE DE ira ####
@@ -40,13 +40,13 @@
   ira <- ts(ira$casos, start = 2015, frequency = 52)
   
 #### GRAFICAS ####
-##Serie de tiempo (solo tiene hasta la semana 11 de cada a駉)
+##Serie de tiempo (solo tiene hasta la semana 11 de cada a帽o)
   ts.plot(ira)
   
 ##Grafica estacional por semana
   ggseasonplot(ira) + ylab("Casos reportados por semana") + 
-    labs(title = "Nuevos casos de Infecci髇 Respiratoria Aguda reportados", 
-         subtitle = "Bolet韓 Epidemiol骻ico del Sistema Nacional de Vigilancia Epidemiol骻ica",
-         caption = "Elaboraci髇 propia con datos de la Secretar韆 de Salud | @mellamopeter") +
-    xlab("Semana epidemiol骻ica") +theme(legend.title=element_blank())
+    labs(title = "Nuevos casos de Infecci贸n Respiratoria Aguda reportados", 
+         subtitle = "Bolet铆n Epidemiol贸gico del Sistema Nacional de Vigilancia Epidemiol贸gica",
+         caption = "Elaboraci贸n propia con datos de la Secretar铆a de Salud | @mellamopeter") +
+    xlab("Semana epidemiol贸gica") +theme(legend.title=element_blank())
 
