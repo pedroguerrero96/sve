@@ -1,13 +1,4 @@
----
-title: "Nuevos casos de neumonía e infección respiratoria aguda"
-output: html_document
----
-
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
-
-## Casos reportados por semana
+## Nuevos casos de neumonía e infección respiratoria aguda reportados por semana
 
 La Secretaría de Salud del Gobierno de México publica, semana tras semana, el número de nuevos casos reportados de neumonía y de infección respiratoria aguda a través del Boletín Epidemiológico que elabora el Sistema de Vigilancia Epidemiológica.
 
