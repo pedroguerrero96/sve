@@ -1,12 +1,12 @@
 ####  SEGUMIENTO DE CASOS DE NEUMONIA E INFECCION RESPIRATORIA AGUDA 
-####  Fuente: Bolet韓 Epidemiol骻ico del Sistema Nacional de Vigilancia Epidemiol骻ica
+####  Fuente: Bolet铆n Epidemiol贸gico del Sistema Nacional de Vigilancia Epidemiol贸gica
 ####  Pedro Guerrero (@mellamopeter)
 ####  Escrito intencionalmente sin acentos
 ####  Ultima actualizacion: semana 12 (publicada el 30 de marzo)
 
   options(scipen = 999)
 #### DEFINE EL DIRECTORIO DE TRABAJO AQUI ####
-  setwd("D:/OneDrive - Centro de Investigacion y Docencia Economicas CIDE/Documentos/COVID")
+  setwd("")
 
 #### INSTALACION Y CARGA DE PAQUETES ####
   install.packages(c("tidyverse", "readxl", "forecast"))
@@ -14,7 +14,7 @@
   library(readxl)
   library(forecast)
 
-#### CARGA DE LA BASE DE NEUMON虯 ####
+#### CARGA DE LA BASE DE NEUMON脥A ####
   neumonia <- read_excel(path = "datos/boletin.xlsx", sheet = "neumonia")
 
 #### CONVERTIMOS LA BASE A UNA SERIE ####
@@ -26,10 +26,10 @@
   
   ##Grafica estacional por semana
   ggseasonplot(neumonia, season.labels = c(1:12)) + ylab("Casos reportados por semana") + 
-    labs(title = "Nuevos casos de neumon韆 reportados", 
-         subtitle = "Bolet韓 Epidemiol骻ico del Sistema Nacional de Vigilancia Epidemiol骻ica",
-         caption = "Elaboraci髇 propia con datos de la Secretar韆 de Salud | @mellamopeter") +
-    xlab("Semana epidemiol骻ica") + theme(legend.title=element_blank()) 
+    labs(title = "Nuevos casos de neumon铆a reportados", 
+         subtitle = "Bolet铆n Epidemiol贸gico del Sistema Nacional de Vigilancia Epidemiol贸gica",
+         caption = "Elaboraci贸n propia con datos de la Secretar铆a de Salud | @mellamopeter") +
+    xlab("Semana epidemiol贸gica") + theme(legend.title=element_blank()) 
    
   
 #### CARGA DE LA BASE DE ira ####
@@ -44,8 +44,8 @@
 
 ##Grafica estacional por semana
   ggseasonplot(ira, season.labels = 1:12) + ylab("Casos reportados por semana") + 
-    labs(title = "Nuevos casos de Infecci髇 Respiratoria Aguda reportados", 
-         subtitle = "Bolet韓 Epidemiol骻ico del Sistema Nacional de Vigilancia Epidemiol骻ica",
-         caption = "Elaboraci髇 propia con datos de la Secretar韆 de Salud | @mellamopeter") +
-    xlab("Semana epidemiol骻ica") +theme(legend.title=element_blank())
+    labs(title = "Nuevos casos de Infecci贸n Respiratoria Aguda reportados", 
+         subtitle = "Bolet铆n Epidemiol贸gico del Sistema Nacional de Vigilancia Epidemiol贸gica",
+         caption = "Elaboraci贸n propia con datos de la Secretar铆a de Salud | @mellamopeter") +
+    xlab("Semana epidemiol贸gica") +theme(legend.title=element_blank())
 
