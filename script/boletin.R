@@ -19,13 +19,13 @@
 
 #### CONVERTIMOS LA BASE A UNA SERIE ####
   neumonia <- neumonia %>% gather("ano","casos",2:7)
-  neumonia <- neumonia %>% filter(semana < 13)
-  neumonia <- ts(neumonia$casos, start = 2015, frequency = 12)
+  neumonia <- neumonia %>% filter(semana < 14)
+  neumonia <- ts(neumonia$casos, start = 2015, frequency = 13)
 
 #### GRAFICAS ####
   
   ##Grafica estacional por semana
-  ggseasonplot(neumonia, season.labels = c(1:12)) + ylab("Casos reportados por semana") + 
+  ggseasonplot(neumonia, season.labels = c(1:13)) + ylab("Casos reportados por semana") + 
     labs(title = "Nuevos casos de neumonía reportados", 
          subtitle = "Boletín Epidemiológico del Sistema Nacional de Vigilancia Epidemiológica",
          caption = "Elaboración propia con datos de la Secretaría de Salud | @mellamopeter") +
@@ -37,13 +37,13 @@
   
 #### CONVERTIMOS LA BASE A UNA SERIE ####
   ira <- ira %>% gather("ano","casos",2:7)
-  ira <- ira %>% filter(semana < 13)
-  ira <- ts(ira$casos, start = 2015, frequency = 12)
+  ira <- ira %>% filter(semana < 14)
+  ira <- ts(ira$casos, start = 2015, frequency = 13)
   
 #### GRAFICAS ####
 
 ##Grafica estacional por semana
-  ggseasonplot(ira, season.labels = 1:12) + ylab("Casos reportados por semana") + 
+  ggseasonplot(ira, season.labels = 1:13) + ylab("Casos reportados por semana") + 
     labs(title = "Nuevos casos de Infección Respiratoria Aguda reportados", 
          subtitle = "Boletín Epidemiológico del Sistema Nacional de Vigilancia Epidemiológica",
          caption = "Elaboración propia con datos de la Secretaría de Salud | @mellamopeter") +
