@@ -12,7 +12,7 @@ Adicionalmente, los datos reportados en las columnas de casos acumulados al día
 
 Finalmente, el boletín no es suficientemente claro hasta qué día están disponible los datos que muestra. Como referencia, tomo la fecha que aparece en la portada del boletín, pero puede existir un desfase de una semana dependiendo de cuándo se empiezan a contar las semanas (es decir, si la semana 1 comienza el 29 de diciembre o el 5 de enero).
 
-Para las semanas 11, 12 y 13 reporto gráficas con el comportamiento estacional de ambos padecimientos. A partir de la semana 14 también reporto las gráficas del canal endémico de cada padecimiento.
+Para las semanas 11, 12 y 13 reporto gráficas con el comportamiento estacional de ambos padecimientos. A partir de la semana 14 también reporto las gráficas del canal endémico de cada padecimiento, estimado con la metodología de [Bortman (1998)](https://scielosp.org/article/rpsp/1999.v5n1/1-8/es/).
 
 **ÚLTIMA ACTUALIZACIÓN: SEMANA 14**
 
