@@ -15,4 +15,5 @@ Finalmente, el boletín no es suficientemente claro hasta qué día están dispo
 Para las semanas 11, 12 y 13 reporto gráficas con el comportamiento estacional de ambos padecimientos. A partir de la semana 14 también reporto las gráficas del canal endémico de cada padecimiento.
 
 **ÚLTIMA ACTUALIZACIÓN: SEMANA 14**
+
 Publicada el 13 de abril de 2020
