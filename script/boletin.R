@@ -1,51 +1,133 @@
 ####  SEGUMIENTO DE CASOS DE NEUMONIA E INFECCION RESPIRATORIA AGUDA 
-####  Fuente: Bolet铆n Epidemiol贸gico del Sistema Nacional de Vigilancia Epidemiol贸gica
+####  Fuente: Bolet韓 Epidemiol骻ico del Sistema Nacional de Vigilancia Epidemiol骻ica
 ####  Pedro Guerrero (@mellamopeter)
 ####  Escrito intencionalmente sin acentos
 ####  Ultima actualizacion: semana 12 (publicada el 30 de marzo)
 
   options(scipen = 999)
 #### DEFINE EL DIRECTORIO DE TRABAJO AQUI ####
-  setwd("")
+  setwd("D:/OneDrive - Centro de Investigacion y Docencia Economicas CIDE/Documentos/COVID")
 
 #### INSTALACION Y CARGA DE PAQUETES ####
-  install.packages(c("tidyverse", "readxl", "forecast"))
+  #install.packages(c("tidyverse", "readxl", "forecast"))
   library(tidyverse)
   library(readxl)
   library(forecast)
+  library(psych)
 
-#### CARGA DE LA BASE DE NEUMON脥A ####
+#### CARGA DE LA BASE DE NEUMON虯 ####
   neumonia <- read_excel(path = "datos/boletin.xlsx", sheet = "neumonia")
 
 #### CONVERTIMOS LA BASE A UNA SERIE ####
   neumonia <- neumonia %>% gather("ano","casos",2:7)
-  neumonia <- neumonia %>% filter(semana < 14)
-  neumonia <- ts(neumonia$casos, start = 2015, frequency = 13)
+  neumonia <- neumonia %>% filter(semana < 15)
+  
+#### CANAL ENDEMICO ####
+  
+  ##Saquemos la serie de 2020
+  veinte <- neumonia %>% filter(ano == 2020)
+  veinte$tipo <- as.character(2020)
+  
+  ##Necesitamos la media geometrica y los intervalos de confianza
+  geom_casos <- neumonia %>% group_by(semana) %>% summarise(mean = geometric.mean(casos), sd = sd(casos))
+  
+  geom_casos$lo <- geom_casos$mean - 2.78*geom_casos$sd/sqrt(5)
 
-#### GRAFICAS ####
+  geom_casos$hi <- geom_casos$mean + 2.78*geom_casos$sd/sqrt(5)
+  
+  geom_casos$sd <- NULL
+  
+  ##Para efectos de visualizacion, le restamos el intervalo inferior a la media y al alto
+  geom_casos$hi <- geom_casos$hi - geom_casos$mean
+  
+  geom_casos$mean <- geom_casos$mean - geom_casos$lo
+  
+  geom_casos <- geom_casos %>% gather("tipo", "casos", 2:4) 
+  
+  geom_casos$tipo <- factor(geom_casos$tipo , levels=c("hi", "mean", "lo"))
   
   ##Grafica estacional por semana
-  ggseasonplot(neumonia, season.labels = c(1:13)) + ylab("Casos reportados por semana") + 
-    labs(title = "Nuevos casos de neumon铆a reportados", 
-         subtitle = "Bolet铆n Epidemiol贸gico del Sistema Nacional de Vigilancia Epidemiol贸gica",
-         caption = "Elaboraci贸n propia con datos de la Secretar铆a de Salud | @mellamopeter") +
-    xlab("Semana epidemiol贸gica") + theme(legend.title=element_blank()) 
-   
+  ggplot(geom_casos) + aes(x = semana, y = casos, fill = tipo) + geom_area() + 
+    geom_line(data = veinte, aes(x=semana, y=casos)) + 
+    scale_color_manual(values = c("black", "red", "green", "yellow")) +
+    scale_fill_manual(limits = c("2020", "hi", "mean", "lo"),labels = c("2020", "Alarma", "Seguridad", "蓌ito") ,values = c("black", "red", "yellow", "green")) +
+                ylab("Casos reportados por semana") + 
+    labs(title = "Canal end閙ico de neumon韆s", 
+         subtitle = "Bolet韓 Epidemiol骻ico del Sistema Nacional de Vigilancia Epidemiol骻ica",
+         caption = "Elaboraci髇 propia con datos de la Secretar韆 de Salud | @mellamopeter") +
+       theme(legend.title=element_blank()) + 
+    scale_x_continuous(name = "Semana epidemiol骻ica", breaks = seq(1,14,1)) +
+    theme_bw()+
+    scale_y_continuous(labels=function(x) format(x, big.mark = ",", scientific = FALSE))
   
-#### CARGA DE LA BASE DE ira ####
+#### Comportamiento estacional ####
+  ##Pasemos la base a serie
+  
+  neumonia <- ts(neumonia$casos, start = 2015, frequency = 14)
+  
+  ##Grafica estacional por semana
+  ggseasonplot(neumonia, season.labels = c(1:14)) + ylab("Casos reportados por semana") + 
+    labs(title = "Nuevos casos de neumon韆 reportados", 
+         subtitle = "Bolet韓 Epidemiol骻ico del Sistema Nacional de Vigilancia Epidemiol骻ica",
+         caption = "Elaboraci髇 propia con datos de la Secretar韆 de Salud | @mellamopeter") +
+    xlab("Semana epidemiol骻ica") + theme(legend.title=element_blank()) 
+
+
+  
+#### CARGA DE LA BASE DE IRA ####
   ira <- read_excel(path = "datos/boletin.xlsx", sheet = "ira")
   
 #### CONVERTIMOS LA BASE A UNA SERIE ####
   ira <- ira %>% gather("ano","casos",2:7)
-  ira <- ira %>% filter(semana < 14)
-  ira <- ts(ira$casos, start = 2015, frequency = 13)
+  ira <- ira %>% filter(semana < 15)
   
-#### GRAFICAS ####
-
-##Grafica estacional por semana
-  ggseasonplot(ira, season.labels = 1:13) + ylab("Casos reportados por semana") + 
-    labs(title = "Nuevos casos de Infecci贸n Respiratoria Aguda reportados", 
-         subtitle = "Bolet铆n Epidemiol贸gico del Sistema Nacional de Vigilancia Epidemiol贸gica",
-         caption = "Elaboraci贸n propia con datos de la Secretar铆a de Salud | @mellamopeter") +
-    xlab("Semana epidemiol贸gica") +theme(legend.title=element_blank())
-
+#### CANAL ENDEMICO ####
+  
+  ##Saquemos la serie de 2020
+  veinte <- ira %>% filter(ano == 2020)
+  veinte$tipo <- as.character(2020)
+  
+  ##Necesitamos la media geometrica y los intervalos de confianza
+  geom_casos <- ira %>% group_by(semana) %>% summarise(mean = geometric.mean(casos), sd = sd(casos))
+  
+  geom_casos$lo <- geom_casos$mean - 2.78*geom_casos$sd/sqrt(5)
+  
+  geom_casos$hi <- geom_casos$mean + 2.78*geom_casos$sd/sqrt(5)
+  
+  geom_casos$sd <- NULL
+  
+  ##Para efectos de visualizacion, le restamos el intervalo inferior a la media y al alto
+  geom_casos$hi <- geom_casos$hi - geom_casos$mean
+  
+  geom_casos$mean <- geom_casos$mean - geom_casos$lo
+  
+  geom_casos <- geom_casos %>% gather("tipo", "casos", 2:4) 
+  
+  geom_casos$tipo <- factor(geom_casos$tipo , levels=c("hi", "mean", "lo"))
+  
+  ##Grafica estacional por semana
+  ggplot(geom_casos) + aes(x = semana, y = casos, fill = tipo) + geom_area() + 
+    geom_line(data = veinte, aes(x=semana, y=casos)) + 
+    scale_color_manual(values = c("black", "red", "green", "yellow")) +
+    scale_fill_manual(limits = c("2020", "hi", "mean", "lo"),labels = c("2020", "Alarma", "Seguridad", "蓌ito") ,values = c("black", "red", "yellow", "green")) +
+    ylab("Casos reportados por semana") + 
+    labs(title = "Canal end閙ico de Infecci髇 Respiratoria Aguda", 
+         subtitle = "Bolet韓 Epidemiol骻ico del Sistema Nacional de Vigilancia Epidemiol骻ica",
+         caption = "Elaboraci髇 propia con datos de la Secretar韆 de Salud | @mellamopeter") +
+    theme(legend.title=element_blank()) + 
+    scale_x_continuous(name = "Semana epidemiol骻ica", breaks = seq(1,14,1)) +
+    scale_y_continuous(labels=function(x) format(x, big.mark = ",", scientific = FALSE))
+  
+ 
+  
+#### Comportamiento estacional ####
+  ##Pasemos la base a serie
+  ira <- ts(ira$casos, start = 2015, frequency = 14)
+  
+  ##Grafica estacional por semana
+  ggseasonplot(ira, season.labels = 1:14) + ylab("Casos reportados por semana") + 
+    labs(title = "Nuevos casos de Infecci髇 Respiratoria Aguda reportados", 
+         subtitle = "Bolet韓 Epidemiol骻ico del Sistema Nacional de Vigilancia Epidemiol骻ica",
+         caption = "Elaboraci髇 propia con datos de la Secretar韆 de Salud | @mellamopeter") +
+    xlab("Semana epidemiol骻ica") +theme(legend.title=element_blank())
+  
