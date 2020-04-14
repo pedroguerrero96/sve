@@ -1,12 +1,12 @@
 ####  SEGUMIENTO DE CASOS DE NEUMONIA E INFECCION RESPIRATORIA AGUDA 
-####  Fuente: Bolet韓 Epidemiol骻ico del Sistema Nacional de Vigilancia Epidemiol骻ica
+####  Fuente: Bolet铆n Epidemiol贸gico del Sistema Nacional de Vigilancia Epidemiol贸gica
 ####  Pedro Guerrero (@mellamopeter)
 ####  Escrito intencionalmente sin acentos
-####  Ultima actualizacion: semana 12 (publicada el 30 de marzo)
+####  Ultima actualizacion: semana 14 (publicada el 13 de abril)
 
   options(scipen = 999)
 #### DEFINE EL DIRECTORIO DE TRABAJO AQUI ####
-  setwd("D:/OneDrive - Centro de Investigacion y Docencia Economicas CIDE/Documentos/COVID")
+  setwd("")
 
 #### INSTALACION Y CARGA DE PAQUETES ####
   #install.packages(c("tidyverse", "readxl", "forecast"))
@@ -15,7 +15,7 @@
   library(forecast)
   library(psych)
 
-#### CARGA DE LA BASE DE NEUMON虯 ####
+#### CARGA DE LA BASE DE NEUMON脥A ####
   neumonia <- read_excel(path = "datos/boletin.xlsx", sheet = "neumonia")
 
 #### CONVERTIMOS LA BASE A UNA SERIE ####
@@ -50,13 +50,13 @@
   ggplot(geom_casos) + aes(x = semana, y = casos, fill = tipo) + geom_area() + 
     geom_line(data = veinte, aes(x=semana, y=casos)) + 
     scale_color_manual(values = c("black", "red", "green", "yellow")) +
-    scale_fill_manual(limits = c("2020", "hi", "mean", "lo"),labels = c("2020", "Alarma", "Seguridad", "蓌ito") ,values = c("black", "red", "yellow", "green")) +
+    scale_fill_manual(limits = c("2020", "hi", "mean", "lo"),labels = c("2020", "Alarma", "Seguridad", "脡xito") ,values = c("black", "red", "yellow", "green")) +
                 ylab("Casos reportados por semana") + 
-    labs(title = "Canal end閙ico de neumon韆s", 
-         subtitle = "Bolet韓 Epidemiol骻ico del Sistema Nacional de Vigilancia Epidemiol骻ica",
-         caption = "Elaboraci髇 propia con datos de la Secretar韆 de Salud | @mellamopeter") +
+    labs(title = "Canal end茅mico de neumon铆as", 
+         subtitle = "Bolet铆n Epidemiol贸gico del Sistema Nacional de Vigilancia Epidemiol贸gica",
+         caption = "Elaboraci贸n propia con datos de la Secretar铆a de Salud | @mellamopeter") +
        theme(legend.title=element_blank()) + 
-    scale_x_continuous(name = "Semana epidemiol骻ica", breaks = seq(1,14,1)) +
+    scale_x_continuous(name = "Semana epidemiol贸gica", breaks = seq(1,14,1)) +
     theme_bw()+
     scale_y_continuous(labels=function(x) format(x, big.mark = ",", scientific = FALSE))
   
@@ -67,10 +67,10 @@
   
   ##Grafica estacional por semana
   ggseasonplot(neumonia, season.labels = c(1:14)) + ylab("Casos reportados por semana") + 
-    labs(title = "Nuevos casos de neumon韆 reportados", 
-         subtitle = "Bolet韓 Epidemiol骻ico del Sistema Nacional de Vigilancia Epidemiol骻ica",
-         caption = "Elaboraci髇 propia con datos de la Secretar韆 de Salud | @mellamopeter") +
-    xlab("Semana epidemiol骻ica") + theme(legend.title=element_blank()) 
+    labs(title = "Nuevos casos de neumon铆a reportados", 
+         subtitle = "Bolet铆n Epidemiol贸gico del Sistema Nacional de Vigilancia Epidemiol贸gica",
+         caption = "Elaboraci贸n propia con datos de la Secretar铆a de Salud | @mellamopeter") +
+    xlab("Semana epidemiol贸gica") + theme(legend.title=element_blank()) 
 
 
   
@@ -109,13 +109,13 @@
   ggplot(geom_casos) + aes(x = semana, y = casos, fill = tipo) + geom_area() + 
     geom_line(data = veinte, aes(x=semana, y=casos)) + 
     scale_color_manual(values = c("black", "red", "green", "yellow")) +
-    scale_fill_manual(limits = c("2020", "hi", "mean", "lo"),labels = c("2020", "Alarma", "Seguridad", "蓌ito") ,values = c("black", "red", "yellow", "green")) +
+    scale_fill_manual(limits = c("2020", "hi", "mean", "lo"),labels = c("2020", "Alarma", "Seguridad", "脡xito") ,values = c("black", "red", "yellow", "green")) +
     ylab("Casos reportados por semana") + 
-    labs(title = "Canal end閙ico de Infecci髇 Respiratoria Aguda", 
-         subtitle = "Bolet韓 Epidemiol骻ico del Sistema Nacional de Vigilancia Epidemiol骻ica",
-         caption = "Elaboraci髇 propia con datos de la Secretar韆 de Salud | @mellamopeter") +
+    labs(title = "Canal end茅mico de Infecci贸n Respiratoria Aguda", 
+         subtitle = "Bolet铆n Epidemiol贸gico del Sistema Nacional de Vigilancia Epidemiol贸gica",
+         caption = "Elaboraci贸n propia con datos de la Secretar铆a de Salud | @mellamopeter") +
     theme(legend.title=element_blank()) + 
-    scale_x_continuous(name = "Semana epidemiol骻ica", breaks = seq(1,14,1)) +
+    scale_x_continuous(name = "Semana epidemiol贸gica", breaks = seq(1,14,1)) +
     scale_y_continuous(labels=function(x) format(x, big.mark = ",", scientific = FALSE))
   
  
@@ -126,8 +126,8 @@
   
   ##Grafica estacional por semana
   ggseasonplot(ira, season.labels = 1:14) + ylab("Casos reportados por semana") + 
-    labs(title = "Nuevos casos de Infecci髇 Respiratoria Aguda reportados", 
-         subtitle = "Bolet韓 Epidemiol骻ico del Sistema Nacional de Vigilancia Epidemiol骻ica",
-         caption = "Elaboraci髇 propia con datos de la Secretar韆 de Salud | @mellamopeter") +
-    xlab("Semana epidemiol骻ica") +theme(legend.title=element_blank())
+    labs(title = "Nuevos casos de Infecci贸n Respiratoria Aguda reportados", 
+         subtitle = "Bolet铆n Epidemiol贸gico del Sistema Nacional de Vigilancia Epidemiol贸gica",
+         caption = "Elaboraci贸n propia con datos de la Secretar铆a de Salud | @mellamopeter") +
+    xlab("Semana epidemiol贸gica") +theme(legend.title=element_blank())
   
