@@ -12,5 +12,7 @@ Adicionalmente, los datos reportados en las columnas de casos acumulados al día
 
 Finalmente, el boletín no es suficientemente claro hasta qué día están disponible los datos que muestra. Como referencia, tomo la fecha que aparece en la portada del boletín, pero puede existir un desfase de una semana dependiendo de cuándo se empiezan a contar las semanas (es decir, si la semana 1 comienza el 29 de diciembre o el 5 de enero).
 
-**ÚLTIMA ACTUALIZACIÓN: SEMANA 13**
-Publicada el 6 de abril de 2020
+Para las semanas 11, 12 y 13 reporto gráficas con el comportamiento estacional de ambos padecimientos. A partir de la semana 14 también reporto las gráficas del canal endémico de cada padecimiento.
+
+**ÚLTIMA ACTUALIZACIÓN: SEMANA 14**
+Publicada el 13 de abril de 2020
