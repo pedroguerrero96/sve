@@ -20,7 +20,7 @@
 
 #### CONVERTIMOS LA BASE A UNA SERIE ####
   neumonia <- neumonia %>% gather("ano","casos",2:7)
-  neumonia <- neumonia %>% filter(semana < 15)
+  neumonia <- neumonia %>% filter(semana < 16)
   
 #### CANAL ENDEMICO ####
   
@@ -56,17 +56,17 @@
          subtitle = "Boletín Epidemiológico del Sistema Nacional de Vigilancia Epidemiológica",
          caption = "Elaboración propia con datos de la Secretaría de Salud | @mellamopeter") +
        theme(legend.title=element_blank()) + 
-    scale_x_continuous(name = "Semana epidemiológica", breaks = seq(1,14,1)) +
+    scale_x_continuous(name = "Semana epidemiológica", breaks = seq(1,15,1)) +
     theme_bw()+
     scale_y_continuous(labels=function(x) format(x, big.mark = ",", scientific = FALSE))
   
 #### Comportamiento estacional ####
   ##Pasemos la base a serie
   
-  neumonia <- ts(neumonia$casos, start = 2015, frequency = 14)
+  neumonia <- ts(neumonia$casos, start = 2015, frequency = 15)
   
   ##Grafica estacional por semana
-  ggseasonplot(neumonia, season.labels = c(1:14)) + ylab("Casos reportados por semana") + 
+  ggseasonplot(neumonia, season.labels = c(1:15)) + ylab("Casos reportados por semana") + 
     labs(title = "Nuevos casos de neumonía reportados", 
          subtitle = "Boletín Epidemiológico del Sistema Nacional de Vigilancia Epidemiológica",
          caption = "Elaboración propia con datos de la Secretaría de Salud | @mellamopeter") +
@@ -79,7 +79,7 @@
   
 #### CONVERTIMOS LA BASE A UNA SERIE ####
   ira <- ira %>% gather("ano","casos",2:7)
-  ira <- ira %>% filter(semana < 15)
+  ira <- ira %>% filter(semana < 16)
   
 #### CANAL ENDEMICO ####
   
@@ -115,17 +115,17 @@
          subtitle = "Boletín Epidemiológico del Sistema Nacional de Vigilancia Epidemiológica",
          caption = "Elaboración propia con datos de la Secretaría de Salud | @mellamopeter") +
     theme(legend.title=element_blank()) + 
-    scale_x_continuous(name = "Semana epidemiológica", breaks = seq(1,14,1)) +
+    scale_x_continuous(name = "Semana epidemiológica", breaks = seq(1,15,1)) +
     scale_y_continuous(labels=function(x) format(x, big.mark = ",", scientific = FALSE))
   
  
   
 #### Comportamiento estacional ####
   ##Pasemos la base a serie
-  ira <- ts(ira$casos, start = 2015, frequency = 14)
+  ira <- ts(ira$casos, start = 2015, frequency = 15)
   
   ##Grafica estacional por semana
-  ggseasonplot(ira, season.labels = 1:14) + ylab("Casos reportados por semana") + 
+  ggseasonplot(ira, season.labels = 1:15) + ylab("Casos reportados por semana") + 
     labs(title = "Nuevos casos de Infección Respiratoria Aguda reportados", 
          subtitle = "Boletín Epidemiológico del Sistema Nacional de Vigilancia Epidemiológica",
          caption = "Elaboración propia con datos de la Secretaría de Salud | @mellamopeter") +
