@@ -2,7 +2,7 @@
 ####  Fuente: Boletín Epidemiológico del Sistema Nacional de Vigilancia Epidemiológica
 ####  Pedro Guerrero (@mellamopeter)
 ####  Escrito intencionalmente sin acentos
-####  Ultima actualizacion: semana 14 (publicada el 13 de abril)
+####  Ultima actualizacion: semana 15 (publicada el 20 de abril)
 
   options(scipen = 999)
 #### DEFINE EL DIRECTORIO DE TRABAJO AQUI ####
